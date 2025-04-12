@@ -22,6 +22,10 @@ A sleek and responsive web application built with **Flask** and **HTML/CSS/JavaS
 - Python 3.8+
 - `pip` installed
 - (Optional) Virtual environment tool like `venv`
+ ```bash
+ run: python src/preprocess.py
+ then run : python src/train.py
+ This will take upto 1.2 hours depending upon your laptop specification
 
 ---
 
@@ -29,6 +33,3 @@ A sleek and responsive web application built with **Flask** and **HTML/CSS/JavaS
 ```bash
 pip install -r requirements.txt
 
-### run: python src/preprocess.py
-### then run : python src/train.py
-## This will take upto 1.2 hours depending upon your laptop specification
