@@ -18,7 +18,6 @@ A sleek and responsive web application built with **Flask** and **HTML/CSS/JavaS
 
 ## 🚀 How to Run the Project
 
-### 🛠️ Install Dependencies:
 ```bash
 pip install -r requirements.txt
 - Python 3.8+
