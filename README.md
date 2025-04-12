@@ -1,36 +1,34 @@
-This project implements a sarcasm detection model using machine learning techniques. It processes text data and predicts whether the given sentence is sarcastic or not. The application provides a web interface where users can enter text and receive predictions along with detailed explanations for the classification.
+# 🤖 Sarcasm Detection Web App
 
-Requirements
-Make sure you have the following dependencies installed:
+A sleek and responsive web application built with **Flask** and **HTML/CSS/JavaScript** that detects sarcasm in user-entered sentences using a fine-tuned NLP model (like DistilBERT). The app also includes contextual options such as the situation and the person you're speaking to, making detection smarter and more relevant.
 
-Python 3.7+
-Libraries:
-fastapi
-uvicorn
-scikit-learn
-nltk
-pandas
-pickle
+---
 
-You can install all dependencies by running:
+## 📸 Features
+
+- 🔍 Detects whether a sentence is sarcastic or not.
+- 📝 User selects the **situation** and **who they're talking to** for contextual analysis.
+- 📊 Collects user feedback on prediction accuracy.
+- 📂 View prediction history.
+- 📱 Fully responsive and mobile-friendly UI.
+- 🍔 Sidebar with animated hamburger menu for navigation.
+- 📄 Additional pages: **About**, **Contact**, **Working**.
+
+---
+
+## 🚀 How to Run the Project
+
+### 📦 Prerequisites:
+- Python 3.8+
+- `pip` installed
+- (Optional) Virtual environment tool like `venv`
+
+---
+
+### 🛠️ Install Dependencies:
+```bash
 pip install -r requirements.txt
 
-🚀 Setup & Usage
-
-1. Clone this repository:
-
-2. Install Dependencies:
-pip install -r requirements.txt
-
-3. Dataset
-The dataset is expected to be in the Data/reduces_reddit_sarcasm.csv file. You can get the dataset from Kaggle or another source.
-
-4. Preprocess Data
-run: python src/preprocess.py
-
-5. Train the Model
-run : python src/train.py
-
-6. run : python app.py
-
-The server will start
+### run: python src/preprocess.py
+### then run : python src/train.py
+## This will take upto 1.2 hours depending upon your laptop specification
