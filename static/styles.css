@@ -1,0 +1,316 @@
+/* Background */
+/* Body centers the main-wrapper */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at center, #2d1e50, #1b1033);
+    color: #f5f5f5;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hamburger Icon */
+.hamburger-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1001;
+    background: #1b1033;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -312px;
+    height: 100%;
+    width: 250px;
+    background: rgba(20, 15, 40, 0.98);
+    padding: 60px 20px;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
+    transition: left 0.4s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Show the sidebar */
+.sidebar.open {
+    left: 0;
+}
+
+/* Sidebar Button */
+.sidebar button {
+    background: #5c4dd3;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.sidebar button:hover {
+    background: #4a3bbd;
+}
+.sidebar a {
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.sidebar a:hover {
+    background-color: #3b3ca5;
+}
+
+
+/* Wrapper holds form and feedback side by side */
+.main-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 90vw;  /* Prevent horizontal overflow */
+}
+
+
+
+/* Container */
+.container {
+    background: rgba(20, 15, 40, 0.9);
+    border-radius: 20px;
+    padding: 40px 30px;
+    width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Header */
+.container h2 {
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #fdfdfd;
+    text-align: center;
+}
+
+/* Inputs & Dropdowns */
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border: none;
+    border-radius: 10px;
+    background-color: #1b1033;
+    color: #f0f0f0;
+    font-size: 15px;
+}
+
+::placeholder {
+    color: #ffffff;
+    opacity: 0.7; /* Optional: makes it a little lighter for better UX */
+}
+
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right, #5c4dd3, #3b3ca5);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: linear-gradient(to right, #4a3bbd, #2e2f87);
+}
+
+/* Result */
+#result {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #d5d5ff;
+}
+
+/* Feedback Buttons */
+#feedback-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#feedback-buttons p {
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+#feedback-buttons button {
+    width: 48%;
+    display: inline-block;
+    margin: 5px 1%;
+    padding: 10px 0;
+    background: #1f1a40;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    font-size: 14px;
+}
+
+#feedback-buttons button:hover {
+    background-color: #302c59;
+}
+
+/* Feedback message */
+#feedback-message {
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Optional: scrollbar for dropdown if needed */
+/* select {
+    overflow-y: auto;
+    max-height: 200px;
+} */
+
+
+/* Feedback Section Styled Like Container */
+#feedback-buttons {
+    background: rgba(20, 15, 40, 0.9);
+    border-radius: 20px;
+    padding: 30px 20px;
+    width: 280px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    margin-left:40px;
+    height: fit-content;
+}
+
+
+/* Feedback Buttons */
+#feedback-buttons p {
+    margin-bottom: 15px;
+    color: #ddd;
+    font-size: 16px;
+    text-align: center;
+}
+
+#feedback-buttons button {
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+    background: #1f1a40;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#feedback-buttons button:hover {
+    background-color: #302c59;
+}
+
+
+/* Make input fields and buttons bigger & readable on small screens */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        padding: 20px;
+        height: auto;
+    }
+
+    .hamburger-icon {
+        font-size: 24px;
+        padding: 8px 12px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .main-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 100%;
+        padding-top: 60px;
+    }
+
+    .container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .container h2 {
+        font-size: 22px;
+    }
+
+    input[type="text"],
+    select {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    #result {
+        font-size: 15px;
+        text-align: center;
+    }
+
+    #feedback-buttons {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 25px 15px;
+    }
+
+    #feedback-buttons p {
+        font-size: 15px;
+    }
+
+    #feedback-buttons button {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+
+    .sidebar {
+        width: 80%;
+        padding: 60px 1px;
+        margin-left: -50px;
+    }
+
+    .sidebar a {
+        font-size: 16px;
+        margin-top: 16px;
+        padding: 10px 16px;
+        margin-left: 50px;
+    }
+
+    .sidebar button {
+        font-size: 15px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+}
+

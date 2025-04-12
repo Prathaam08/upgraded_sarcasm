@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <title>Sarcasm Detector</title>
+    <script>
+        function checkSarcasm() {
+            let sentence = document.getElementById("sentence").value.trim();
+            let situation = document.getElementById("situation").value;
+            let person = document.getElementById("person").value;
+
+            if (!sentence) {
+                document.getElementById("result").innerHTML = "Please enter a sentence!";
+                return;
+            }
+
+            fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    text: sentence,
+                    situation: situation,
+                    who_talking_to: person
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.prediction) {
+                        document.getElementById("result").innerHTML = `<strong>Prediction:</strong> ${data.prediction}`;
+                    } else {
+                        document.getElementById("result").innerHTML = "Error: Invalid response!";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById("result").innerHTML = "Error detecting sarcasm!";
+                });
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("open");
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger-icon" onclick="toggleSidebar()">☰</div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="about.html">🧾 About</a>
+        <a href="contact.html">📞 Contact</a>
+        <a href="services.html">⚙️ Services</a>
+        <a href="working.html">🔧 Working</a>
+        <a href="history">🕘 Check History</a>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="container">
+            <h2>Sarcasm Detection</h2>
+            <input type="text" id="sentence" placeholder="Enter a sentence..." />
+            <p id="feedback-message"></p>
+
+            <label for="situation">Select Situation:</label>
+            <select id="situation">
+                <option value="Casual conversation">Casual conversation</option>
+                <option value="At work">At work</option>
+                <option value="In a classroom">In a classroom</option>
+                <option value="Online comment">Online comment</option>
+            </select>
+
+            <label for="person">Who are you talking to?</label>
+            <select id="person">
+                <option value="Friend">Friend</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Boss">Boss</option>
+                <option value="Stranger">Stranger</option>
+            </select>
+
+            <button onclick="checkSarcasm()">Check Sarcasm</button>
+            <p id="result"></p>
+
+        </div>
+    </div>
+    <div id="feedback-buttons">
+        <p>Was this prediction correct?</p>
+        <button onclick="sendFeedback('correct')">👍 Yes</button>
+        <button onclick="sendFeedback('incorrect')">👎 No</button>
+
+    </div>
+
+    <script>
+        function checkHistory() {
+            fetch("/history")
+                .then(response => response.json())
+                .then(data => {
+                    let historyDiv = document.getElementById("history");
+                    historyDiv.innerHTML = "<h3>Prediction History</h3>";
+
+                    if (data.history.length === 0) {
+                        historyDiv.innerHTML += "<p>No history available.</p>";
+                        return;
+                    }
+
+                    let list = "<ul>";
+                    data.history.forEach(item => {
+                        list += `<li><strong>Sentence:</strong> ${item.text} <br> 
+                         <strong>Situation:</strong> ${item.situation} <br> 
+                         <strong>Person:</strong> ${item.who_talking_to} <br> 
+                         <strong>Prediction:</strong> ${item.prediction}</li><hr>`;
+                    });
+                    list += "</ul>";
+                    historyDiv.innerHTML += list;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById("history").innerHTML = "Error fetching history!";
+
+                });
+
+        }
+
+        function sendFeedback(feedbackType) {
+            const text = document.getElementById('sentence').value.trim(); // Corrected ID
+            const situation = document.getElementById('situation').value;
+            const who = document.getElementById('person').value; // Corrected ID
+            const message = document.getElementById('feedback-message');
+
+            if (!text) {
+                message.textContent = "Please enter the sentence first.";
+                message.style.color = "#d40d31";
+                return;
+            }
+
+            fetch('/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text: text,
+                    situation: situation,
+                    who_talking_to: who,
+                    feedback: feedbackType
+                }),
+            })
+                .then(response => response.text())
+                .then(data => {
+                    message.textContent = data;
+                    message.style.color = "green";
+                })
+                .catch(error => {
+                    message.textContent = "Error sending feedback.";
+                    message.style.color = "red";
+                });
+        }
+
+
+
+    </script>
+</body>
+
+</html>

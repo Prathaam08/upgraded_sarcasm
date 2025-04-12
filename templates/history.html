@@ -1,0 +1,309 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Prediction History</title>
+    <script>
+        function fetchHistory() {
+            fetch("/get_history")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("History data received:", data); // Debugging log
+
+                    let historyDiv = document.getElementById("history");
+                    historyDiv.innerHTML = "<h2>Prediction History</h2>";
+
+                    if (!data.history || data.history.length === 0) {
+                        historyDiv.innerHTML += "<p>No history available.</p>";
+                        return;
+                    }
+
+                    let table = `
+                     <table>
+                         <thead>
+                             <tr>
+                                 <th>Sentence</th>
+                                 <th>Situation</th>
+                                 <th>Talking To</th>
+                                 <th>Prediction</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                 `;
+
+                    data.history.forEach(item => {
+                        table += `
+                         <tr>
+                             <td>${item.text}</td>
+                             <td>${item.situation}</td>
+                             <td>${item.who_talking_to}</td>
+                             <td>${item.prediction}</td>
+                         </tr>
+                     `;
+                    });
+
+                    table += `</tbody></table>`;
+                    historyDiv.innerHTML += table;
+                })
+                .catch(error => {
+                    console.error("Error fetching history:", error);
+                    document.getElementById("history").innerHTML = "Error fetching history!";
+                });
+        }
+
+        window.onload = fetchHistory;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            color: #000;
+            /* Ensure text is black */
+            background-color: #fff;
+            /* Default background for all rows */
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+            /* Light gray for alternating rows */
+        }
+
+        tr:hover td {
+            background-color: #e0e0e0;
+            /* Slightly darker gray on hover */
+        }
+
+        /* Add scroll functionality */
+        #history {
+            max-height: 400px;
+            /* Adjust the height as per your needs */
+            overflow-y: scroll;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sarcasm Detection - History</h1>
+        <div id="history"></div>
+        <button onclick="window.location.href='/'">Back to Home</button>
+    </div>
+</body>
+
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Prediction History</title>
+    <script>
+        let fullHistory = [];
+
+        function fetchHistory() {
+            fetch("/get_history")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("History data received:", data); // Debugging log
+                    fullHistory = data.history || [];
+                    renderTable(fullHistory);
+                })
+                .catch(error => {
+                    console.error("Error fetching history:", error);
+                    document.getElementById("history").innerHTML = "Error fetching history!";
+                });
+        }
+
+        function renderTable(data) {
+            let historyDiv = document.getElementById("history");
+            historyDiv.innerHTML = "<h2>Prediction History</h2>";
+
+            if (!data || data.length === 0) {
+                historyDiv.innerHTML += "<p>No history available.</p>";
+                return;
+            }
+
+            let table = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sentence</th>
+                            <th>Situation</th>
+                            <th>Talking To</th>
+                            <th>Prediction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.forEach(item => {
+                table += `
+                    <tr>
+                        <td>${item.text}</td>
+                        <td>${item.situation}</td>
+                        <td>${item.who_talking_to}</td>
+                        <td>${item.prediction}</td>
+                    </tr>
+                `;
+            });
+
+            table += `</tbody></table>`;
+            historyDiv.innerHTML += table;
+        }
+
+        function applyFilter() {
+    const filterValue = document.getElementById("filter").value;
+    if (filterValue === "all") {
+        renderTable(fullHistory);
+    } else {
+        const filtered = fullHistory.filter(item =>
+            item.prediction.trim().toLowerCase().startsWith(filterValue)
+        );
+        renderTable(filtered);
+    }
+}
+
+
+
+        window.onload = fetchHistory;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            color: #000;
+            background-color: #fff;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #e0e0e0;
+        }
+
+        #history {
+            max-height: 400px;
+            overflow-y: scroll;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 128px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sarcasm Detection - History</h1>
+
+        <!-- ✅ Filter Dropdown -->
+        <label for="filter"><strong>Filter by Prediction:</strong></label>
+        <select id="filter" onchange="applyFilter()">
+            <option value="all">All</option>
+            <option value="sarcastic">Sarcastic</option>
+            <option value="not sarcastic">Not Sarcastic</option>
+        </select>
+        
+
+        <div id="history"></div>
+        <button onclick="window.location.href='/'">Back to Home</button>
+    </div>
+</body>
+
+</html>

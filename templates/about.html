@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - Sarcasm Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at center, #2d1e50, #1b1033);
+            color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .about-container {
+            background: rgba(20, 15, 40, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            max-width: 600px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        a {
+            color: #7f80f4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #5c4dd3, #3b3ca5);
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(to right, #4a3bbd, #2e2f87);
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <h1>About This Project</h1>
+        <p>This Sarcasm Detection web app is built using <strong>Python</strong>, <strong>Flask</strong>, and <strong>machine learning</strong> techniques to detect sarcasm in text, considering contextual information like the situation and the person you're talking to.</p>
+        <p>It aims to make text analysis more accurate by incorporating real-world conversational context.</p>
+        <p>You can check the sarcasm in any sentence, view your history, and provide feedback to help improve the model.</p>
+        <p>Created by <a href="#">Your Name</a>.</p>
+        <a href="/" class="back-button">← Back to Home</a>
+    </div>
+</body>
+</html>
