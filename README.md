@@ -18,18 +18,14 @@ A sleek and responsive web application built with **Flask** and **HTML/CSS/JavaS
 
 ## 🚀 How to Run the Project
 
-### 📦 Prerequisites:
-- Python 3.8+
-- `pip` installed
-- (Optional) Virtual environment tool like `venv`
- ```bash
- run: python src/preprocess.py
- then run : python src/train.py
- This will take upto 1.2 hours depending upon your laptop specification
-
----
-
 ### 🛠️ Install Dependencies:
 ```bash
 pip install -r requirements.txt
+- Python 3.8+
+- `pip` installed
+- (Optional) Virtual environment tool like `venv`
+
+ run: python src/preprocess.py
+ then run : python src/train.py
+ This will take upto 1.2 hours depending upon your laptop specification
 
