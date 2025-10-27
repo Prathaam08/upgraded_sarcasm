@@ -28,3 +28,4 @@ pip install -r requirements.txt
  then run : python src/train.py
  This will take upto 1.2 hours depending upon your laptop specification
 
+
