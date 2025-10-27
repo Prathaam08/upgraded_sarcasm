@@ -64,21 +64,6 @@ def compute_metrics(eval_pred):
     predictions = torch.argmax(torch.tensor(logits), dim=-1)
     return metric.compute(predictions=predictions, references=labels)
 
-# # Training arguments with cosine learning rate decay
-# training_args = TrainingArguments(
-#     output_dir="models",
-#     per_device_train_batch_size=8,
-#     per_device_eval_batch_size=8,
-#     num_train_epochs=5,
-#     evaluation_strategy="epoch",
-#     save_strategy="epoch",
-#     load_best_model_at_end=True,
-#     logging_dir="logs",
-#     fp16=True,
-#     warmup_steps=500,
-#     learning_rate=5e-5,
-#     lr_scheduler_type="cosine",
-# )
 
 training_args = TrainingArguments(
     output_dir="models",
@@ -118,3 +103,4 @@ trainer.save_model("models/sarcasm_detector")
 tokenizer.save_pretrained("models/sarcasm_detector")
 
 print("Model training complete and saved!")
+
